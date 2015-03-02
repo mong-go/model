@@ -10,10 +10,21 @@ type ModelReader interface {
 	Collection() string
 }
 
+// WriteType is a Save or Update
+type WriteType int
+
+const (
+	_ WriteType = iota
+	Save
+	Update
+)
+
 // ModelWriter is an interface representing a struct used for both reading and
 // writing to a mongo database
 type ModelWriter interface {
 	ModelReader
 
-	Valid(*mgo.Database) error
+	// Valid is intented to run before a save/update call and will return an error
+	// if the model is invalid.
+	Valid(WriteType, *mgo.Database) error
 }
