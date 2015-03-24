@@ -10,13 +10,13 @@ type ModelReader interface {
 	CollectionName() string
 }
 
-// WriteType is a Save or Update
+// WriteType is a SAVE or UPDATE
 type WriteType int
 
 const (
 	_ WriteType = iota
-	Save
-	Update
+	SAVE
+	UPDATE
 )
 
 // ModelWriter is an interface representing a struct used for both reading and
