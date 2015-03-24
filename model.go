@@ -24,7 +24,7 @@ const (
 type ModelWriter interface {
 	ModelReader
 
-	// Valid is intented to run before a save/update call and will return an error
-	// if the model is invalid.
-	Valid(WriteType, *mgo.Database) error
+	// Validate is intented to run before a save/update call and will return an
+	// error if the model is invalid.
+	Validate(WriteType, *mgo.Database) error
 }
