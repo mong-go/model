@@ -6,8 +6,8 @@ import (
 
 // ModelReader is an interface representing a struct used only for queriyng
 type ModelReader interface {
-	// Collection is the name of the mongodb collection
-	Collection() string
+	// CollectionName is the name of the mongodb collection
+	CollectionName() string
 }
 
 // WriteType is a Save or Update
