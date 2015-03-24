@@ -25,6 +25,8 @@ type ModelWriter interface {
 	ModelReader
 
 	// Validate is intented to run before a save/update call and will return an
-	// error if the model is invalid.
+	// error if the model is invalid. Errors are not resent on each validate call
+	// that is up to userland to handle any reseting between validations on a
+	// singular object
 	Validate(WriteType, *mgo.Database) error
 }
