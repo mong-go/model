@@ -14,6 +14,7 @@ func TestModelEmbeddedEncoding(t *testing.T) {
 		Name: "foo",
 	}
 	m.AddError("name", errors.New("cannot be blank"))
+
 	w := httptest.NewRecorder()
 	err := json.NewEncoder(w).Encode(m)
 	if err != nil {
