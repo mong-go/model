@@ -10,12 +10,7 @@ var ErrInvalidCollectionName = errors.New("invalid collection name")
 
 // Save saves a ModelWriter to db
 func Save(m ModelWriter, db *mgo.Database) error {
-	err := m.Validate(SAVE, db)
-	if err != nil {
-		return err
-	}
-
-	c, err := Getc(m, db)
+	c, err := save(SAVE, m, db)
 	if err != nil {
 		return err
 	}
@@ -27,17 +22,23 @@ func Save(m ModelWriter, db *mgo.Database) error {
 
 // Update saves a ModelWriter to db, against a given selector
 func Update(sel interface{}, m ModelWriter, db *mgo.Database) error {
-	err := m.Validate(UPDATE, db)
-	if err != nil {
-		return err
-	}
-
-	c, err := Getc(m, db)
+	c, err := save(UPDATE, m, db)
 	if err != nil {
 		return err
 	}
 
 	return c.Update(sel, m)
+}
+
+func save(wt WriteType, m ModelWriter, db *mgo.Database) (*mgo.Collection,
+	error) {
+
+	err := m.Validate(wt, db)
+	if err != nil {
+		return nil, err
+	}
+
+	return Getc(m, db)
 }
 
 // TODO UpdateAll
