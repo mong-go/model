@@ -61,3 +61,16 @@ func (m *Model) Errors() error {
 func (m *Model) ResetErrors() {
 	m.FieldErrors = nil
 }
+
+var _ ModelWriter = &Model{}
+
+func (m *Model) CollectionName() string {
+	panic("CollectionName() error: must be re-implemented in the embedding " +
+		" struct")
+
+	return ""
+}
+
+func (m *Model) Validate(_ WriteType, _ *mgo.Database) error {
+	return nil
+}
